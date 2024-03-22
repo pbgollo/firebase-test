@@ -28,10 +28,10 @@
 
         <div class="form-box login">
             <h2>Login</h2>
-            <form action="#">
+            <form action="#" id="loginForm">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                    <input type="text" required>
+                    <input type="email" required>
                     <label>E-mail</label>
                 </div>
                 <div class="input-box">
@@ -52,20 +52,20 @@
 
         <div class="form-box register">
             <h2>Cadastro</h2>
-            <form action="#">
+            <form action="#" id="registerForm">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person"></ion-icon></span>
-                    <input type="text" required>
+                    <input type="text" id="name" required>
                     <label>Usuário</label>
                 </div>
                 <div class="input-box">
                     <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                    <input type="text" required>
+                    <input type="email" id="email" required>
                     <label>E-mail</label>
                 </div>
                 <div class="input-box">
                     <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                    <input type="password" required>
+                    <input type="password" id="password" required>
                     <label>Senha</label>
                 </div>
                 <div class="remember-forgot">
@@ -79,29 +79,10 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyDq_eiA3igbD9caSVaPQtuKHxDrdo5Jwco",
-          authDomain: "login-test-57850.firebaseapp.com",
-          databaseURL: "https://login-test-57850-default-rtdb.firebaseio.com",
-          projectId: "login-test-57850",
-          storageBucket: "login-test-57850.appspot.com",
-          messagingSenderId: "835738544097",
-          appId: "1:835738544097:web:db7e8903cc9896b04954a0"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
