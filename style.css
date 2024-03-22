@@ -255,3 +255,13 @@ header {
 .login-register p a:hover {
     text-decoration: underline;
 }
+
+.alert {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    font-size: .9em;
+    font-weight: 600;
+    color: #42ee76;
+    display: none;
+}

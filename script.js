@@ -32,7 +32,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-var db = firebase.database().ref("loginForm");
+var db = firebase.database().ref("loginForm/" + email);
 
 document.getElementById("registerForm").addEventListener("submit", submitForm);
  
@@ -45,11 +45,13 @@ function submitForm(e) {
 
     saveUser(name, email, password);
 
-    alert("Usuário cadastrado com sucesso.");
+    document.querySelector(".alert").style.display = "block";
 
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
+    document.getElementById("registerForm").reset();
+
+    setTimeout(() => {
+        document.querySelector(".alert").style.display = "none";
+    }, 5000);
 }
 
 const saveUser = (name, email, password) => {
