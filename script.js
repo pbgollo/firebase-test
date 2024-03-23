@@ -1,3 +1,8 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+
+// Comportamento do Formulário
 const wrapper = document.querySelector('.wrapper');
 const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
@@ -18,6 +23,7 @@ btnPopup.addEventListener('click', ()=> {
 
 iconClose.addEventListener('click', ()=> {
     wrapper.classList.remove('active-popup');
+    document.querySelector(".alertLogin").style.display = "none";
     document.getElementById("loginForm").reset();
     document.getElementById("registerForm").reset();
 });
@@ -26,6 +32,7 @@ const getElementVal = (id) => {
     return document.getElementById(id).value
 };
 
+// Configuração do firebase
 const firebaseConfig = {
     apiKey: "AIzaSyDjcUjtIDsuTI3N5ITWRTpWHygwcnfA2F8",
     authDomain: "fir-test-8ebf9.firebaseapp.com",
@@ -36,9 +43,34 @@ const firebaseConfig = {
     appId: "1:772220367580:web:885d8df18e5c354abcba19"
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-var db = firebase.database();
+// Autenticação
+const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
+const googleLogin = document.getElementById("googleBtn");
+
+googleLogin.addEventListener("click", function(){
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const user = result.user;
+
+    document.querySelector(".alertLogin").style.color = "rgb(66,238,118)";
+    document.querySelector(".alertLogin").innerText = "Login com o Google bem-sucedido!";
+
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    document.querySelector(".alertLogin").style.color = "rgb(244,67,54)";
+    document.querySelector(".alertLogin").innerText = "Erro ao logar com o Google!";
+
+  });
+})
+
+// Banco de dados
+const db = getDatabase();
 
 document.getElementById("registerForm").addEventListener("submit", submitForm);
  
@@ -78,22 +110,23 @@ function getUser(e) {
     var name = getElementVal("loginName");
     var password = getElementVal("loginPassword");
 
-    var user_ref = db.ref("users/" + name);
+    // Criando uma referência específica para o usuário
+    const user_ref = ref(db, "users/" + name);
 
-    user_ref.once("value", function(snapshot){
-        var data = snapshot.val();
-        if (data) { // Verifica se o usuário existe
+    // Lendo os dados do usuário
+    onValue(user_ref, (snapshot) => {
+        const data = snapshot.val();
+        if (data) { 
             if (data.password === password) {
-                console.log("Login bem-sucedido!");
-                document.querySelector(".alertLogin").innerText = "Login bem-sucedido!";
                 document.querySelector(".alertLogin").style.color = "rgb(66,238,118)";
+                document.querySelector(".alertLogin").innerText = "Login bem-sucedido!";
             } else {
-                document.querySelector(".alertLogin").innerText = "Senha incorreta!";
-               document.querySelector(".alertLogin").style.color = "rgb(244,67,54)"; 
+                document.querySelector(".alertLogin").style.color = "rgb(244,67,54)";
+                document.querySelector(".alertLogin").innerText = "Senha incorreta!"; 
             }
         } else {
-            document.querySelector(".alertLogin").innerText = "Usuario não encontrado!";
-            document.querySelector(".alertLogin").style.color = "rgb((244,67,54)"; 
+            document.querySelector(".alertLogin").style.color = "rgb(244,67,54)"; 
+            document.querySelector(".alertLogin").innerText = "Usuário não encontrado!";
         }
     });
 
