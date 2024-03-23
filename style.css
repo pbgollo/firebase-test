@@ -265,3 +265,11 @@ header {
     color: #42ee76;
     display: none;
 }
+
+.alertLogin {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    font-size: .9em;
+    font-weight: 600;
+}
