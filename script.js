@@ -43,6 +43,7 @@ const firebaseConfig = {
     appId: "1:772220367580:web:885d8df18e5c354abcba19"
 };
 
+// Importação do Firebase
 const app = initializeApp(firebaseConfig);
 
 // Autenticação
