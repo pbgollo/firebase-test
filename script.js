@@ -75,6 +75,7 @@ const db = getDatabase();
 
 document.getElementById("registerForm").addEventListener("submit", submitForm);
  
+// Funções para salvar no banco
 function submitForm(e) {
     e.preventDefault();
 
@@ -85,11 +86,6 @@ function submitForm(e) {
     saveUser(name, email, password);
 
     document.querySelector(".alert").style.display = "block";
-
-    setTimeout(() => {
-        document.getElementById("registerForm").reset();
-        document.querySelector(".alert").style.display = "none";
-    }, 4000);
 }
 
 const saveUser = (name, email, password) => {
@@ -108,6 +104,7 @@ const saveUser = (name, email, password) => {
 
 document.getElementById("loginForm").addEventListener("submit", getUser);
 
+// Função para consultar o banco
 function getUser(e) {
     e.preventDefault();
 
