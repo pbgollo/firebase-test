@@ -23,6 +23,7 @@ btnPopup.addEventListener('click', ()=> {
 
 iconClose.addEventListener('click', ()=> {
     wrapper.classList.remove('active-popup');
+    document.querySelector(".alert").style.display = "none";
     document.querySelector(".alertLogin").style.display = "none";
     document.getElementById("loginForm").reset();
     document.getElementById("registerForm").reset();
@@ -86,6 +87,11 @@ function submitForm(e) {
     saveUser(name, email, password);
 
     document.querySelector(".alert").style.display = "block";
+
+    setTimeout(() => {
+        document.getElementById("registerForm").reset();
+        document.querySelector(".alert").style.display = "none";
+    }, 4000);
 }
 
 const saveUser = (name, email, password) => {
