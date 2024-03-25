@@ -91,7 +91,7 @@ function submitForm(e) {
     setTimeout(() => {
         document.getElementById("registerForm").reset();
         document.querySelector(".alert").style.display = "none";
-    }, 4000);
+    }, 7000);
 }
 
 const saveUser = (name, email, password) => {
