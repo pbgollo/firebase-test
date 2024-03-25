@@ -56,14 +56,14 @@ googleLogin.addEventListener("click", function(){
   .then((result) => {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const user = result.user;
-
+    document.querySelector(".alert").style.display = "block";
     document.querySelector(".alertLogin").style.color = "rgb(66,238,118)";
     document.querySelector(".alertLogin").innerText = "Login com o Google bem-sucedido!";
 
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-
+    document.querySelector(".alert").style.display = "block";
     document.querySelector(".alertLogin").style.color = "rgb(244,67,54)";
     document.querySelector(".alertLogin").innerText = "Erro ao logar com o Google!";
 
